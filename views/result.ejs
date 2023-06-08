@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Product Selling Website</title>
+    <style> 
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      
+      #header {
+        transition: all 0.5s;
+        z-index: 997;
+        padding: 15px 0;
+      }
+      
+      #header.header-scrolled,
+      #header.header-inner-pages {
+        background: rgba(40, 58, 90, 0.9);
+      }
+      
+      #header .logo {
+        font-size: 30px;
+        margin: 0;
+        padding: 0;
+        line-height: 1;
+        font-weight: 500;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+      
+      #header .logo a {
+        color: #fff;
+      }
+      
+      #header .logo img {
+        max-height: 40px;
+      }
+      
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #1e60a2;
+        height: 60px;
+        padding: 10px 50px;
+        color: #fff;
+        font-size: 16px;
+      }
+      
+      
+      .navbar-search {
+        display: flex;
+        align-items: center;
+        background-color: #1e60a2;
+        border-radius: 4px;
+        padding: 0 10px;
+      }
+      
+      .navbar-search input[type="text"] {
+        border: none;
+        font-size: 16px;
+        padding: 10px;
+        width: 400px;
+      }
+      
+      .navbar-search button {
+        background-color: #dc9626;
+        border: none;
+        border-radius: 4px;
+        color: #fff;
+        cursor: pointer;
+        font-size: 16px;
+        margin-left: 10px;
+        padding: 10px 20px;
+        transition: background-color 0.3s ease;
+      }
+      
+      .navbar-search button:hover {
+        background-color: #dc9626;
+      }
+      
+      .navbar-links {
+        display: flex;
+      }
+      
+      .navbar-links a {
+        color: #fff;
+        text-decoration: none;
+        margin-left: 20px;
+        font-size: 16px;
+      }
+      
+      .navbar-links a:hover {
+        text-decoration: underline;
+      }
+      
+      
+      .wrapper {
+        display: flex;
+        margin-top: 20px;
+      }
+      
+      aside {
+        background-color: #f2f2f2;
+        width: 20%;
+      }
+      
+      aside h2 {
+        font-size: 18px;
+        font-weight: bold;
+        margin: 20px;
+      }
+      
+      aside ul {
+        list-style: none;
+        margin-left: 20px;
+      }
+      
+      aside li {
+        margin: 10px 0;
+      }
+      
+      aside a {
+        color: #333;
+        text-decoration: none;
+      }
+      
+      section {
+        
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 80%;
+        align-items: center; /* center the products vertically */
+        margin: 0 auto;
+      }
+      
+      section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: '../public/assets/img/background/R.jpg';
+        background-size: cover;
+        background-position: center center;
+        
+        filter: blur(5px); /* apply the blur effect */
+        z-index: -1; /* move the pseudo-element behind the products */
+        background-attachment: scroll;
+        height: auto;
+        margin: 0;
+        padding: 0;
+      }
+      section::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: '../public/assets/img/background/R.jpg';
+        background-size: cover;
+        background-position: center center;
+        
+        filter: blur(5px); /* apply the blur effect */
+        z-index: -1; /* move the pseudo-element behind the products */
+        background-attachment: scroll;
+        height: auto;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background-size: cover;
+        background-position: center center;
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        margin: 0;
+        padding: 0;
+        background-color: #18273e;
+
+        
+        
+        z-index: -1; /* move the pseudo-element behind the products */
+        background-attachment: scroll;
+        height: auto;
+        margin: 0;
+        padding: 0;
+      }
+      
+      
+      a {
+        color: black; /* Sets the text color of the product name to black */
+        text-decoration: none; /* Removes the underline from the product name */
+        display: flex;
+      }
+
+      .product {
+
+        display: flex;
+         /* Adds some spacing between each product */
+        flex-direction: column;
+        background-color: rgb(254, 254, 254);
+        border-radius: 10px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(10px);
+        border: 1px solid #0f0909;
+        padding: 20px;
+        width: 280px; /* Update width as per your requirement */
+        height: 450px; /* Update height as per your requirement */
+        transition: box-shadow 0.3s ease;
+        transition: all 0.2s ease-in-out; /* add a transition for smooth animation */
+        overflow: visible;
+        z-index: 1;
+      }
+      
+      .container {
+        height: 50%;
+      }
+
+
+      .product:hover {
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.416);
+        transform: scale(1.1); /* increase the scale of the element on hover */
+        z-index: 5;
+      }
+      
+      .product-details {
+        display: flex;
+        flex-direction: column; /* Align the product details in a column */
+      }
+      
+      .product img {
+        display
+        : block;
+        margin: 0 auto 10px;
+        width: 100%;
+        height: 60%;
+        }
+      
+        .product h3 {
+          font-size: 16px;
+          font-weight: bold;
+          margin-bottom: 10px;
+          }
+          
+          .product p {
+          font-size: 14px;
+          line-height: 1.5;
+          margin-bottom: 10px;
+          }
+          
+          .product .price {
+          font-size: 16px;
+          font-weight: bold;
+          margin-bottom: 10px;
+          }
+          
+          .product button {
+          background-color: #75c7ec;
+          border: none;
+          border-radius: 4px;
+          color: #0e0101;
+          cursor: pointer;
+          font-size: 18px;
+          padding: 8px 16px;
+          transition: background-color 0.3s ease;
+          }
+          
+          .product button:hover {
+          background-color: #419cd8;
+          }
+
+          .product-container {
+            max-height: 400px; /* Set the maximum height of the container */
+            overflow-y: auto; /* Add a vertical scroll bar */
+          }
+          
+          
+          @media only screen and (max-width: 768px) {
+          .wrapper {
+          flex-direction: column;
+          }
+          
+          aside {
+          width: 100%;
+          }
+          
+          
+          .product {
+          width: 100%;
+          }
+          }
+
+          
+          
+          .side-filter.active {
+            right: 0;
+          }
+      
+          .side-filter {
+            position: fixed;
+            top: 50%;
+            left:0;
+            padding: 0px;
+            background-color: #fff;
+            transform: translateY(-50%);
+          }
+          
+          .side-filter h3 {
+            margin-top: 0;
+          }
+
+      
+          .side-filter ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+          }
+          
+          .side-filter li {
+            margin-bottom: 5px;
+          }
+          
+          .side-filter li a {
+            text-decoration: none;
+            color: #000;
+          }
+          
+          .filter-group {
+            margin-bottom: 20px;
+          }
+          
+          .filter-group h4 {
+            margin-top: 0;
+            margin-bottom: 10px;
+          }
+          
+          .range-slider {
+            display: flex;
+            align-items: center;
+          }
+          
+          .range-slider input[type="range"] {
+            margin-right: 10px;
+          }
+          
+          .range-slider p {
+            margin: 0;
+            font-size: 14px;
+          }
+          
+          .apply-btn {
+            background-color: #ee5f73;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+          }
+          
+          .apply-btn:hover {
+            background-color: #cc4c5c;
+          }
+
+          .add-to-cart-btn {
+            width: 120px;
+            height: 40px;
+            text-align: center;
+            color: #dc9626;
+          }
+          
+          .product-name {
+            color: #333; /* Change color to dark gray */
+            font-family:  Georgia;
+            font-size: 16px; /* Change font size to 16px */
+            
+          }
+          
+          .discounted-price:before {
+            
+            font-size: 20px;
+            font-weight: bold;
+            color: rgb(13, 41, 123);
+            margin-right: 5px;
+          }
+
+          .retail-price:before {
+            
+            text-decoration: line-through;
+            font-size: 16px;
+            color: #999;
+            margin-right: 5px;
+          }
+          
+          .price {
+            position: relative;
+            font-size: 20px;
+            font-weight: bold;
+          }
+          
+          .retail-price {
+            text-decoration: line-through;
+            font-size: 16px;
+            color: #999;
+          }
+          
+          .discounted-price {
+            color: rgb(13, 41, 123);
+            font-size: 20px;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+          }
+          
+          .my-button {
+            background-color: #4CAF50; /* set the background color */
+            color: rgb(221, 15, 15); /* set the font color */
+            padding: 10px 20px; /* add padding to the button */
+            border: #265798; /* remove the button border */
+            font-family: 'Franklin Gothic Medium';
+            border-radius: 5px; /* round the corners of the button */
+            cursor: pointer; /* change the cursor to a hand pointer on hover */
+            transition: background-color 0.3s ease-in-out; /* add a transition effect */
+          }
+          
+          .my-button:hover {
+            background-color: #2E8B57; /* change the background color on hover */
+          }
+
+          .navbar-logo {
+            font-size: 30px;
+            margin: 0;
+            padding: 0;
+            line-height: 1;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+          }
+          
+          * Desktop Navigation 
+*/
+.navbar {
+  padding: 0;
+}
+
+.navbar ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  list-style: none;
+  align-items: center;
+}
+
+.navbar li {
+  position: relative;
+}
+
+.navbar a,
+.navbar a:focus {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0 10px 30px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #fff;
+  white-space: nowrap;
+  transition: 0.3s;
+}
+
+.navbar a i,
+.navbar a:focus i {
+  font-size: 12px;
+  line-height: 0;
+  margin-left: 5px;
+}
+
+.navbar a:hover,
+.navbar .active:focus,
+.navbar li:hover>a {
+  color: #47b2e4;
+}
+
+.navbar .getstarted,
+.navbar .getstarted:focus {
+  padding: 8px 20px;
+  margin-left: 30px;
+  border-radius: 50px;
+  color: #fff;
+  font-size: 14px;
+  border: 2px solid #47b2e4;
+  font-weight: 600;
+}
+
+.navbar .getstarted:hover,
+.navbar .getstarted:focus:hover {
+  color: #fff;
+  background: #31a9e1;
+}
+
+.navbar .dropdown ul {
+  display: block;
+  position: absolute;
+  left: 14px;
+  top: calc(100% + 30px);
+  margin: 0;
+  padding: 10px 0;
+  z-index: 99;
+  opacity: 0;
+  visibility: hidden;
+  background: #fff;
+  box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
+  transition: 0.3s;
+  border-radius: 4px;
+}
+
+.navbar .dropdown ul li {
+  min-width: 200px;
+}
+
+.navbar .dropdown ul a {
+  padding: 10px 20px;
+  font-size: 14px;
+  text-transform: none;
+  font-weight: 500;
+  color: #0c3c53;
+}
+
+.navbar .dropdown ul a i {
+  font-size: 12px;
+}
+
+.navbar .dropdown ul a:hover,
+.navbar .dropdown ul .active:hover,
+.navbar .dropdown ul li:hover>a {
+  color: #47b2e4;
+}
+
+.navbar .dropdown:hover>ul {
+  opacity: 1;
+  top: 100%;
+  visibility: visible;
+}
+
+.navbar .dropdown .dropdown ul {
+  top: 0;
+  left: calc(100% - 30px);
+  visibility: hidden;
+}
+
+.navbar .dropdown .dropdown:hover>ul {
+  opacity: 1;
+  top: 0;
+  left: 100%;
+  visibility: visible;
+}
+
+@media (max-width: 1366px) {
+  .navbar .dropdown .dropdown ul {
+    left: -90%;
+  }
+
+  .navbar .dropdown .dropdown:hover>ul {
+    left: -100%;
+  }
+}
+
+/**
+* Mobile Navigation 
+*/
+.mobile-nav-toggle {
+  color: #fff;
+  font-size: 28px;
+  cursor: pointer;
+  display: none;
+  line-height: 0;
+  transition: 0.5s;
+}
+
+.mobile-nav-toggle.bi-x {
+  color: #fff;
+}
+
+@media (max-width: 991px) {
+  .mobile-nav-toggle {
+    display: block;
+  }
+
+  .navbar ul {
+    display: none;
+  }
+}
+
+.navbar-mobile {
+  position: fixed;
+  overflow: hidden;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background: rgba(40, 58, 90, 0.9);
+  transition: 0.3s;
+  z-index: 999;
+}
+
+.navbar-mobile .mobile-nav-toggle {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+
+.navbar-mobile ul {
+  display: block;
+  position: absolute;
+  top: 55px;
+  right: 15px;
+  bottom: 15px;
+  left: 15px;
+  padding: 10px 0;
+  border-radius: 10px;
+  background-color: #fff;
+  overflow-y: auto;
+  transition: 0.3s;
+}
+
+.navbar-mobile a,
+.navbar-mobile a:focus {
+  padding: 10px 20px;
+  font-size: 15px;
+  color: #37517e;
+}
+
+.navbar-mobile a:hover,
+.navbar-mobile .active,
+.navbar-mobile li:hover>a {
+  color: #47b2e4;
+}
+
+.navbar-mobile .getstarted,
+.navbar-mobile .getstarted:focus {
+  margin: 15px;
+  color: #37517e;
+}
+
+.navbar-mobile .dropdown ul {
+  position: static;
+  display: none;
+  margin: 10px 20px;
+  padding: 10px 0;
+  z-index: 99;
+  opacity: 1;
+  visibility: visible;
+  background: #fff;
+  box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
+}
+
+.navbar-mobile .dropdown ul li {
+  min-width: 200px;
+}
+
+.navbar-mobile .dropdown ul a {
+  padding: 10px 20px;
+}
+
+.navbar-mobile .dropdown ul a i {
+  font-size: 12px;
+}
+
+.navbar-mobile .dropdown ul a:hover,
+.navbar-mobile .dropdown ul .active:hover,
+.navbar-mobile .dropdown ul li:hover>a {
+  color: #47b2e4;
+}
+
+.navbar-mobile .dropdown>.dropdown-active {
+  display: block;
+}
+
+          
+    </style>
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+
+    <header id="header" class="fixed-top ">
+      <div class="container d-flex align-items-center">
+    <nav class="navbar">
+		<div class="navbar-logo"><a href="../public/index.html" style = 'font-family: Lucida Handwriting;text-transform: uppercase;color:white;font-size: 30px;letter-spacing: 2px;';>Selectify</a></div>
+		<div class="navbar-search">
+      <form>
+        <input type="text" name="search" placeholder="Search For Products" style="border: none; font-size: 16px; width: 500px; background-color: #f1f1f1;">
+        <button type="submit" style=" background-color:rgb(130, 188, 28); border: black; cursor: pointer; font-size: 16px;  color: #fff;">Search</button>
+      </form>
+		</div>
+
+    <ul>
+      <li><a class="nav-link scrollto active" href="../public/index.html">Home</a></li>
+      <li><a class="nav-link scrollto" href="#">Team</a></li>
+      <li><a class="nav-link scrollto" href="#">Contact</a></li>
+      <li><a class="getstarted scrollto" href="../public/Login.html">LogIn</a></li>
+    </ul>
+
+		
+	  </nav>
+
+
+  </div>
+</header><!-- End Header -->
+	  
+    <div class="wrapper" style="align-items: center;">
+
+      <section>
+
+        <% products.forEach(function(product) { %>
+          <a href="<%= product.product_url %>">
+          <div class="product">
+            <img src="<%= product.image %>" alt="Product 1"  style="width: 200px; height: 200px;"> 
+            <h3 class="product-name"  style="font-size: 16px; width: 200px; display: -webkit-box; -webkit-line-clamp: 6; -webkit-box-orient: vertical; overflow: hidden;" ><%= product.product_name %></h3>
+
+            <div class="price">
+              
+              
+
+              <span class="discounted-price" style="text-align:left"><%= product.retail_price %></span>
+              
+            </div>
+            <button class="my-button" style="text-transform: capitalize; margin-top:25px" ><%= product.website %></button>
+          </div>
+        </a>
+        <% }); %>
+</section>
+</div>
+</body>
+</html>
